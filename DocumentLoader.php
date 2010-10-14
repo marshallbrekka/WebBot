@@ -8,34 +8,29 @@
 class DocumentLoader {
     private $urls = array();
 	private $pages = array();
+	private $internalPointer = 0;
 	private $directory;
 
-	public function  __construct($urls = array()) {
-		$this->urls = $urls;
-	}
-
 	public function addUrls($urls) {
+		$this->urls = array();
 		$this->urls = array_merge($this->urls, $urls);
 	}
 
-	public function resetUrls() {
-		$this->urls = array();
+	public function getNext() {
+		if($this->internalPointer < size($this->pages)) {
+			return $this->pages[$this->internalPointer++];
+		} else {
+			return false;
+		}
+		
 	}
 
-	public function getUrlsAsArray() {
-		$this->loadUrls('array');
-	}
-
-	public function getUrlsAsFiles($directory) {
-
-	}
-
-	private function loadUrls($destination) {
+	private function loadUrls() {
 		$this->pages = array();
 
 		foreach($this->urls as $url) {
 			$data = $this->loadWebPage($url);
-			if(!$data) {
+			if($data) {
 				$this->pages[] = array($url, $data);
 			}
 		}
@@ -57,8 +52,6 @@ class DocumentLoader {
 		return $data;
 	}
 
-	private function writeToFile($fileName, $data) {
-
-	}
 }
+
 ?>
