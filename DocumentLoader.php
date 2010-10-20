@@ -11,6 +11,8 @@ class DocumentLoader {
 	private $internalPointer = 0;
 	private $directory;
 
+
+
 	public function addUrls($urls) {
 		$this->urls = array();
 		$this->urls = array_merge($this->urls, $urls);
