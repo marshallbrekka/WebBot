@@ -71,7 +71,7 @@ class StringSearch {
 
 		$matchingIndexs = array();
 
-		for($z = 0; $z < count($wordPositions[$words[0]]); $z++) {
+		for($z = 0; $z < count($this->wordPositions[$this->words[0]]); $z++) {
 			if($this->areAllWordsPresent($z)) {
 				$matchingIndexs[] = $z;
 			}
@@ -85,11 +85,11 @@ class StringSearch {
 		$words = &$this->words;
 		$wordPositions = &$this->wordPositions;
 		$wordPositions = array();
-		
+
 		for($t = 0; $t < count($words); $t++) {
 			$searchResult = array_search($t, $this->patternIndex);
 
-			if($t != $searchResult && is_bool($searchResult)) {
+			if($t != $this->patternIndex/*$searchResult && is_bool($searchResult)*/) {
 				$wordPositions[$words[$t]] = $this->stringIndex->getIndexArrayOfWord($words[$t]);
 				if(!$wordPositions[$words[$t]]) {
 					return false;
@@ -111,7 +111,7 @@ class StringSearch {
 
 		return $continue;
 	}
-	
+
 	private function isWordPresent($i,$z) {
 		$wordIsPresent = false;
 
@@ -128,7 +128,8 @@ class StringSearch {
 
 		return $wordIsPresent;
 	}
-	
+
+
 	private function getMatchesToPattern($matchingIndexs, $pattern) {
 		$matches = array();
 		foreach($matchingIndexs as $index) {

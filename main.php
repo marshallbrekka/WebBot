@@ -1,6 +1,6 @@
 <?php
 require_once 'DOMParser.php';
-require_once 'StringSearch 2.php';
+require_once 'StringSearch.php';
 
 /**
  * Description of main
